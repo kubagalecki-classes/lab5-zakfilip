@@ -4,15 +4,19 @@
 
 #include <list>
 #include <vector>
+#include <algorithm>
 
-std::vector< char > foo(std::list< Human& >& people)
+std::vector<char> foo(std::list<Human>& a)
 {
     std::vector< char > tmp;
-    for(auto it = people.rbegin(); it!=people.rend(); --it)
+    for (auto& e : a)
     {
-        it->birthday();
-        if(it->isMonster()) tmp.emplace_back('n');
-        else tmp.emplace_back('y');
+        e.birthday();
+        if (e.isMonster())
+            tmp.emplace_back('n');
+        else
+            tmp.emplace_back('y');
     }
+    std::reverse(tmp.begin(), tmp.end());
     return tmp;
 }
